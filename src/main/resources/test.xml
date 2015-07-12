@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process-plan>
+	<plugin ID="reader_id" type="reader" >
+		<jar-dir></jar-dir>
+		<!-- 读取字段：上网帐号、公网IP、上线时间、下线时间 -->
+		<main-class ID="RCLID" class="com.customtime.data.conversion.plugin.XmlReader">
+			<property name="version">1.0</property>
+			<property name="encoding">UTF-8</property>
+			<property name="filePath">C:\\Users\\z00211682\\Desktop\\LUU-334038030712-1214145003.xml</property>
+			<property name="pathPRI">property</property>
+			<property name="defaultFindTagIndex">0</property>
+			<property name="defaultGetPath">property</property>
+			<property name="defaultPropertyIndex">first</property>
+			<property name="rowTagPath">#info#log</property>
+			<property name="row">
+				#info#log[account],
+				#info#log[ipAddr],
+				#info#log[onLineTime],
+				#info#log[offLineTime]
+			</property>
+		</main-class>
+		<rule-id>ruler_id</rule-id>
+	</plugin>
+	<plugin ID="writer2_id" type="writer">
+		<jar-dir></jar-dir>
+		<main-class ID="wid2" class="com.customtime.data.conversion.plugin.writer.FilesWriter">
+			<property name="fileDir">C:\\Users\\z00211682\\Desktop\\iptrace\\data\\result</property>
+			<property name="fileName">gole.txt</property>
+			<property name="cols">*</property>
+			<property name="fieldSplit">,</property>
+			<property name="fileAppend">false</property>
+		</main-class>
+		<rule-id>ruler_id</rule-id>
+	</plugin>
+	<plugin ID="ruler_id" type="ruler">
+		<jar-dir></jar-dir>
+		<main-class ID="rid" class="com.customtime.data.conversion.domain.ruler.DefaultRunRuler">
+			<property name="rulerName">hello ruler</property>
+		</main-class>
+	</plugin>
+</process-plan>
